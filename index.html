@@ -4,7 +4,26 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Lorenzo Jackson | Portfolio</title>
+    <title>Lorenzo Jackson | Full-Stack Developer & CS Student</title>
+
+    <!-- SEO -->
+    <meta name="description" content="Lorenzo Jackson — CS student, full-stack developer, and Air Force National Guard Financial Management Comptroller. Skilled in React, Next.js, Flutter, and Firebase." />
+    <meta name="author" content="Lorenzo Jackson" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Lorenzo Jackson | Developer Portfolio" />
+    <meta property="og:description" content="CS student and developer with experience in web, mobile, and AI tools. Open to opportunities." />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="./assets/profile-pic.jpg" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Lorenzo Jackson | Developer Portfolio" />
+    <meta name="twitter:description" content="CS student and developer. React, Next.js, Flutter, Firebase." />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="./assets/favicon-32x32.png" />
+
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap");
 
@@ -87,6 +106,18 @@
         }
       }
 
+      /* Scroll Progress Bar */
+      #scroll-progress {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 3px;
+        width: 0%;
+        background: var(--gradient);
+        z-index: 9999;
+        transition: width 0.1s linear;
+      }
+
       /* Navigation */
       nav {
         position: fixed;
@@ -128,6 +159,7 @@
         background-clip: text;
         cursor: pointer;
         transition: all 0.3s ease;
+        text-decoration: none;
       }
 
       .logo:hover {
@@ -182,6 +214,7 @@
         gap: 5px;
         cursor: pointer;
         z-index: 1001;
+        padding: 4px;
       }
 
       .hamburger-icon span {
@@ -251,18 +284,39 @@
         justify-content: center;
         padding: 8rem 5% 4rem;
         position: relative;
+        overflow: hidden;
+      }
+
+      /* Particle Canvas */
+      #particle-canvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 0;
       }
 
       #profile .section-container {
         max-width: 1400px;
-        display: grid;
-        grid-template-columns: 1fr 1.2fr;
-        gap: 5rem;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
         align-items: center;
+        gap: 5rem;
+        position: relative;
+        z-index: 1;
       }
 
       .section__pic-container {
         position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-shrink: 0;
+        width: 380px;
         animation: fadeInScale 1s ease;
       }
 
@@ -277,9 +331,33 @@
         }
       }
 
+      /* Profile photo glow ring */
+      #profile .section__pic-container::before {
+        content: "";
+        position: absolute;
+        inset: -6px;
+        border-radius: 2.2rem;
+        background: var(--gradient);
+        z-index: -1;
+        opacity: 0.25;
+        animation: ringPulse 4s ease-in-out infinite;
+      }
+
+      @keyframes ringPulse {
+        0%,
+        100% {
+          opacity: 0.2;
+          transform: scale(1);
+        }
+        50% {
+          opacity: 0.5;
+          transform: scale(1.02);
+        }
+      }
+
       .section__pic-container img {
         width: 100%;
-        max-width: 400px;
+        max-width: 380px;
         border-radius: 2rem;
         box-shadow: 0 25px 50px -12px rgba(99, 102, 241, 0.3);
         border: 3px solid rgba(99, 102, 241, 0.2);
@@ -303,6 +381,43 @@
         to {
           opacity: 1;
           transform: translateX(0);
+        }
+      }
+
+      /* Availability badge */
+      .availability-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: rgba(16, 185, 129, 0.1);
+        border: 1px solid rgba(16, 185, 129, 0.3);
+        color: #10b981;
+        padding: 0.4rem 1rem;
+        border-radius: 2rem;
+        font-size: 0.85rem;
+        font-weight: 500;
+        margin-bottom: 1rem;
+      }
+
+      .availability-badge::before {
+        content: "";
+        width: 8px;
+        height: 8px;
+        background: #10b981;
+        border-radius: 50%;
+        flex-shrink: 0;
+        animation: statusPulse 2s ease-in-out infinite;
+      }
+
+      @keyframes statusPulse {
+        0%,
+        100% {
+          opacity: 1;
+          transform: scale(1);
+        }
+        50% {
+          opacity: 0.4;
+          transform: scale(0.7);
         }
       }
 
@@ -331,6 +446,27 @@
         min-height: 2.5rem;
       }
 
+      /* Blinking cursor */
+      .cursor {
+        display: inline-block;
+        width: 2px;
+        height: 1.1em;
+        background: var(--primary);
+        margin-left: 2px;
+        vertical-align: text-bottom;
+        animation: blink 1s step-end infinite;
+      }
+
+      @keyframes blink {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0;
+        }
+      }
+
       .btn-container {
         display: flex;
         gap: 1rem;
@@ -347,6 +483,10 @@
         border: none;
         font-size: 1rem;
         font-family: inherit;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
       }
 
       .btn-color-1 {
@@ -377,6 +517,11 @@
         gap: 1rem;
       }
 
+      #socials-container a {
+        display: inline-flex;
+        text-decoration: none;
+      }
+
       .icon {
         cursor: pointer;
         transition: all 0.3s ease;
@@ -397,35 +542,48 @@
         transform: translateY(-5px);
       }
 
-      .arrow {
+      /* Section arrow links */
+      a.arrow {
         position: absolute;
         bottom: 2rem;
         left: 50%;
         transform: translateX(-50%);
+        display: inline-block;
         width: 40px;
         height: 40px;
         animation: bounce 2s infinite;
         opacity: 0.7;
+        z-index: 1;
+        text-decoration: none;
+        cursor: pointer;
+        transition: opacity 0.3s ease;
+      }
+
+      a.arrow img {
+        width: 40px;
+        height: 40px;
+        display: block;
+      }
+
+      a.arrow:hover {
+        opacity: 1;
       }
 
       @keyframes bounce {
         0%,
         100% {
-          transform: translate(-50%, 0);
+          transform: translateX(-50%) translateY(0);
         }
         50% {
-          transform: translate(-50%, 15px);
+          transform: translateX(-50%) translateY(12px);
         }
-      }
-
-      .arrow:hover {
-        opacity: 1;
       }
 
       /* Section Styling */
       section {
         padding: 6rem 5%;
         position: relative;
+        z-index: 1;
       }
 
       section:not(#profile) {
@@ -438,13 +596,64 @@
         font-size: 0.95rem;
         text-transform: uppercase;
         letter-spacing: 2px;
-        color: var(--gray);
+        color: var(--primary);
         margin-bottom: 0.5rem;
+        font-weight: 600;
       }
 
       h1.title {
         text-align: center;
         margin-bottom: 4rem;
+      }
+
+      /* Profile text overrides */
+      #profile .section__text__p1 {
+        text-align: center;
+        text-transform: none;
+        letter-spacing: 0;
+        font-size: 1.1rem;
+        color: var(--gray);
+        font-weight: 500;
+      }
+
+      #profile h1.title {
+        text-align: center;
+        margin-bottom: 1rem;
+      }
+
+      #profile .section__text__p2 {
+        text-align: center;
+      }
+
+      #profile .section__text {
+        text-align: center;
+      }
+
+      #profile .btn-container {
+        justify-content: center;
+      }
+
+      #profile #socials-container {
+        justify-content: center;
+      }
+
+      /* Section title gradient underline */
+      section:not(#profile) h1.title {
+        position: relative;
+        padding-bottom: 1.5rem;
+        margin-bottom: 4rem;
+      }
+
+      section:not(#profile) h1.title::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 60px;
+        height: 3px;
+        background: var(--gradient);
+        border-radius: 2px;
       }
 
       /* About Section */
@@ -538,7 +747,25 @@
         border-radius: 1.5rem;
         padding: 2rem;
         border: 1px solid rgba(255, 255, 255, 0.05);
-        transition: all 0.3s ease;
+        transition: all 0.4s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .experience-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: var(--gradient);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      .experience-card:hover::before {
+        opacity: 1;
       }
 
       .experience-card:hover {
@@ -553,13 +780,17 @@
         margin-bottom: 1rem;
         border-radius: 0.75rem;
         object-fit: cover;
-        cursor: pointer;
         transition: all 0.3s ease;
       }
 
       .experience-icon:hover {
         transform: scale(1.1);
         filter: brightness(1.2);
+      }
+
+      .experience-card a.company-link {
+        display: inline-block;
+        text-decoration: none;
       }
 
       .experience-card h3 {
@@ -570,9 +801,12 @@
 
       .experience-card span {
         display: block;
-        color: var(--gray);
-        font-size: 0.9rem;
+        color: var(--primary);
+        font-size: 0.85rem;
+        font-weight: 500;
         margin-bottom: 1.5rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
       }
 
       .experience-card ul {
@@ -621,12 +855,20 @@
       .skill-category:hover {
         border-color: rgba(99, 102, 241, 0.3);
         transform: translateY(-5px);
+        box-shadow: 0 20px 40px -15px rgba(99, 102, 241, 0.15);
       }
 
       .skill-category h3 {
-        font-size: 1.3rem;
+        font-size: 1.1rem;
         margin-bottom: 1.5rem;
         color: var(--light);
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+      }
+
+      .skill-category h3 .cat-icon {
+        font-size: 1.3rem;
       }
 
       .badges {
@@ -644,13 +886,25 @@
         font-weight: 500;
         border: 1px solid rgba(99, 102, 241, 0.2);
         transition: all 0.3s ease;
+        cursor: default;
       }
 
       .badge:hover {
-        background: var(--gradient);
-        border-color: var(--primary);
+        background: rgba(99, 102, 241, 0.25);
+        border-color: rgba(99, 102, 241, 0.5);
         transform: translateY(-2px);
-        cursor: default;
+        color: #fff;
+      }
+
+      .badge.highlight {
+        background: rgba(16, 185, 129, 0.1);
+        border-color: rgba(16, 185, 129, 0.3);
+        color: #10b981;
+      }
+
+      .badge.highlight:hover {
+        background: rgba(16, 185, 129, 0.2);
+        border-color: rgba(16, 185, 129, 0.5);
       }
 
       /* Projects Section */
@@ -677,9 +931,18 @@
 
       .article-container {
         width: 100%;
-        height: 250px;
+        height: 220px;
         overflow: hidden;
         background: rgba(0, 0, 0, 0.2);
+        position: relative;
+      }
+
+      .article-container::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to bottom, transparent 60%, rgba(2, 6, 23, 0.6));
+        pointer-events: none;
       }
 
       .project-img {
@@ -690,7 +953,7 @@
       }
 
       .color-container:hover .project-img {
-        transform: scale(1.1);
+        transform: scale(1.08);
       }
 
       .project-title {
@@ -746,6 +1009,7 @@
       .contact-info-container:hover {
         border-color: rgba(99, 102, 241, 0.3);
         transform: translateY(-5px);
+        box-shadow: 0 15px 30px -10px rgba(99, 102, 241, 0.15);
       }
 
       .contact-icon {
@@ -790,11 +1054,48 @@
         font-size: 0.9rem;
       }
 
+      /* Back to Top Button */
+      #back-to-top {
+        position: fixed;
+        bottom: 2rem;
+        right: 2rem;
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        background: var(--gradient);
+        border: none;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.3s ease;
+        z-index: 998;
+        box-shadow: 0 8px 20px rgba(99, 102, 241, 0.4);
+      }
+
+      #back-to-top.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      #back-to-top:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 14px 30px rgba(99, 102, 241, 0.6);
+      }
+
+      #back-to-top svg {
+        width: 18px;
+        height: 18px;
+        fill: white;
+      }
+
       /* Fade-in Animation */
       .fade-in {
         opacity: 0;
         transform: translateY(30px);
-        transition: all 0.8s ease;
+        transition: opacity 0.7s ease, transform 0.7s ease;
       }
 
       .fade-in.show {
@@ -827,19 +1128,17 @@
         }
 
         #profile .section-container {
-          grid-template-columns: 1fr;
-          gap: 3rem;
+          flex-direction: column;
+          gap: 2.5rem;
           text-align: center;
         }
 
         .section__pic-container {
-          order: -1;
-          display: flex;
-          justify-content: center;
+          width: 280px;
         }
 
         .section__pic-container img {
-          max-width: 350px;
+          max-width: 280px;
         }
 
         .btn-container {
@@ -848,6 +1147,16 @@
 
         #socials-container {
           justify-content: center;
+        }
+
+        .availability-badge {
+          margin: 0 auto 1rem;
+        }
+
+        #profile .section__text__p1,
+        #profile h1.title,
+        #profile .section__text__p2 {
+          text-align: center;
         }
 
         #about .section-container {
@@ -882,8 +1191,12 @@
           padding: 7rem 5% 3rem;
         }
 
+        .section__pic-container {
+          width: 240px;
+        }
+
         .section__pic-container img {
-          max-width: 280px;
+          max-width: 240px;
         }
 
         .btn {
@@ -906,13 +1219,24 @@
           width: 100%;
           max-width: 400px;
         }
+
+        #back-to-top {
+          bottom: 1.25rem;
+          right: 1.25rem;
+          width: 42px;
+          height: 42px;
+        }
       }
     </style>
   </head>
   <body>
+    <canvas id="particle-canvas" aria-hidden="true"></canvas>
+    <!-- Scroll Progress -->
+    <div id="scroll-progress"></div>
+
     <!-- Desktop Navigation -->
     <nav id="desktop-nav">
-      <div class="logo">Lorenzo Jackson</div>
+      <a href="#profile" class="logo">Lorenzo Jackson</a>
       <div>
         <ul class="nav-links">
           <li><a href="#about">About</a></li>
@@ -926,20 +1250,27 @@
 
     <!-- Mobile Navigation -->
     <nav id="hamburger-nav">
-      <div class="logo">Lorenzo Jackson</div>
+      <a href="#profile" class="logo">Lorenzo Jackson</a>
       <div class="hamburger-menu">
-        <div class="hamburger-icon" onclick="toggleMenu()">
+        <div
+          class="hamburger-icon"
+          onclick="toggleMenu()"
+          role="button"
+          tabindex="0"
+          aria-label="Toggle navigation menu"
+          aria-expanded="false"
+        >
           <span></span>
           <span></span>
           <span></span>
         </div>
-        <div class="menu-links">
+        <ul class="menu-links">
           <li><a href="#about" onclick="toggleMenu()">About</a></li>
           <li><a href="#experience" onclick="toggleMenu()">Experience</a></li>
           <li><a href="#skills" onclick="toggleMenu()">Skills</a></li>
           <li><a href="#projects" onclick="toggleMenu()">Projects</a></li>
           <li><a href="#contact" onclick="toggleMenu()">Contact</a></li>
-        </div>
+        </ul>
       </div>
     </nav>
 
@@ -953,48 +1284,44 @@
           />
         </div>
         <div class="section__text">
+          <div class="availability-badge">Open to Opportunities</div>
           <p class="section__text__p1">Hello, I'm</p>
           <h1 class="title">Lorenzo Jackson</h1>
           <p class="section__text__p2"></p>
           <div class="btn-container">
-            <button
+            <a
+              href="./assets/ResumeV4.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
               class="btn btn-color-2"
-              onclick="window.open('./assets/ResumeV4.pdf')"
             >
               Download CV
-            </button>
-            <button
-              class="btn btn-color-1"
-              onclick="location.href = '#contact'"
-            >
-              Contact Info
-            </button>
+            </a>
+            <a href="#contact" class="btn btn-color-1">Contact Info</a>
           </div>
           <div id="socials-container">
-            <img
-              src="./assets/linkedin.png"
-              alt="LinkedIn"
-              class="icon"
-              onclick="
-                location.href =
-                  'https://www.linkedin.com/in/lorenzo-jackson-b1439524a/'
-              "
-            />
-            <img
-              src="./assets/github.png"
-              alt="Github"
-              class="icon"
-              onclick="location.href = 'https://github.com/keezyttg'"
-            />
+            <a
+              href="https://www.linkedin.com/in/lorenzo-jackson-b1439524a/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn profile"
+            >
+              <img src="./assets/linkedin.png" alt="LinkedIn" class="icon" />
+            </a>
+            <a
+              href="https://github.com/keezyttg"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="GitHub profile"
+            >
+              <img src="./assets/github.png" alt="GitHub" class="icon" />
+            </a>
           </div>
         </div>
       </div>
-      <img
-        src="./assets/arrow.png"
-        alt="Arrow"
-        class="icon arrow"
-        onclick="location.href = '#about'"
-      />
+      <a href="#about" class="arrow" aria-label="Scroll to About section">
+        <img src="./assets/arrow.png" alt="" loading="lazy" />
+      </a>
     </section>
 
     <!-- About Section -->
@@ -1005,8 +1332,9 @@
         <div class="section__pic-container">
           <img
             src="./assets/_DSC9063.png"
-            alt="Profile picture"
+            alt="Lorenzo Jackson"
             class="about-pic"
+            loading="lazy"
           />
         </div>
         <div class="about-details-container">
@@ -1014,8 +1342,9 @@
             <div class="details-container">
               <img
                 src="./assets/experience.png"
-                alt="Experience icon"
+                alt=""
                 class="icon"
+                loading="lazy"
               />
               <h3>Experience</h3>
               <p>
@@ -1025,8 +1354,9 @@
             <div class="details-container">
               <img
                 src="./assets/education.png"
-                alt="Education icon"
+                alt=""
                 class="icon"
+                loading="lazy"
               />
               <h3>Education</h3>
               <p>B.Sc. in Computer Science (In Progress)</p>
@@ -1036,7 +1366,7 @@
             <p>
               I'm a Computer Science student with a focus in Software
               Development and an active member of the Air Force National Guard
-              as a Financial Management & Comptroller. I bring a unique blend of
+              as a Financial Management &amp; Comptroller. I bring a unique blend of
               technical expertise and leadership experience, and I thrive on
               solving problems through thoughtful, creative solutions.
             </p>
@@ -1049,12 +1379,9 @@
           </div>
         </div>
       </div>
-      <img
-        src="./assets/arrow.png"
-        alt="Arrow"
-        class="icon arrow"
-        onclick="location.href = '#experience'"
-      />
+      <a href="#experience" class="arrow" aria-label="Scroll to Experience section">
+        <img src="./assets/arrow.png" alt="" loading="lazy" />
+      </a>
     </section>
 
     <!-- Experience Section -->
@@ -1065,14 +1392,21 @@
       <div class="experience-cards">
         <!-- Bascom Hunter Technologies -->
         <div class="experience-card">
-          <img
-            src="./assets/bascom.png"
-            alt="Software Development icon"
-            class="experience-icon"
-            onclick="window.open('https://bascomhunter.com/', '_blank')"
-          />
+          <a
+            href="https://bascomhunter.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="company-link"
+          >
+            <img
+              src="./assets/bascom.png"
+              alt="Bascom Hunter Technologies"
+              class="experience-icon"
+              loading="lazy"
+            />
+          </a>
           <h3>Software Development Intern</h3>
-          <span>Bascom Hunter Technologies, Inc. | Summer 2026 (Incoming)</span>
+          <span>Bascom Hunter Technologies, Inc. &bull; Summer 2026 (Incoming)</span>
           <ul>
             <li>
               Selected for competitive internship to develop software solutions
@@ -1083,31 +1417,29 @@
 
         <!-- Advanced Systems Integration Consultants (ASIC, Inc.) -->
         <div class="experience-card">
-          <img
-            src="./assets/logo.png"
-            alt="Controls Engineering icon"
-            class="experience-icon"
-            style="
-              width: 80px;
-              height: 60px;
-              object-fit: contain;
-              background: white;
-              padding: 5px;
-            "
-            onclick="window.open('https://www.asicinc.com/', '_blank')"
-          />
-          <h3>Controls Engineering Intern (HMI and Industrial Automation)</h3>
-          <span
-            >Advanced Systems Integration Consultants (ASIC, Inc.) | Jan 2026 –
-            May 2026</span
+          <a
+            href="https://www.asicinc.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="company-link"
           >
+            <img
+              src="./assets/logo.png"
+              alt="ASIC Inc."
+              class="experience-icon"
+              style="width: 80px; height: 60px; object-fit: contain; background: white; padding: 5px;"
+              loading="lazy"
+            />
+          </a>
+          <h3>Controls Engineering Intern</h3>
+          <span>Advanced Systems Integration Consultants (ASIC, Inc.) &bull; Jan 2026 – May 2026</span>
           <ul>
             <li>
-              Working with HMI (Human-Machine Interface) and industrial
+              Worked with HMI (Human-Machine Interface) and industrial
               automation systems.
             </li>
             <li>
-              Gaining hands-on experience in controls engineering within a
+              Gained hands-on experience in controls engineering within a
               professional environment.
             </li>
           </ul>
@@ -1115,14 +1447,21 @@
 
         <!-- Handshake AI Solutions -->
         <div class="experience-card">
-          <img
-            src="./assets/download.jpeg"
-            alt="AI Research icon"
-            class="experience-icon"
-            onclick="window.open('https://joinhandshake.com/', '_blank')"
-          />
-          <h3>AI Research Assistant (Data Annotation)</h3>
-          <span>Handshake AI Solutions | Nov 2025 – Jan 2026</span>
+          <a
+            href="https://joinhandshake.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="company-link"
+          >
+            <img
+              src="./assets/download.jpeg"
+              alt="Handshake AI Solutions"
+              class="experience-icon"
+              loading="lazy"
+            />
+          </a>
+          <h3>AI Research Assistant</h3>
+          <span>Handshake AI Solutions &bull; Nov 2025 – Jan 2026</span>
           <ul>
             <li>
               Analyzed and labeled AI generated images for multimodal model
@@ -1141,23 +1480,25 @@
 
         <!-- Air Force National Guard -->
         <div class="experience-card">
-          <img
-            src="./assets/Seperated-Symbol.jpg"
-            alt="Air Force icon"
-            class="experience-icon"
-            onclick="
-              window.open(
-                'https://www.airforce.com/ways-to-serve/air-national-guard',
-                '_blank',
-              )
-            "
-          />
-          <h3>Financial Management & Comptroller</h3>
-          <span>Air Force National Guard | Jun 2021 – Present</span>
+          <a
+            href="https://www.airforce.com/ways-to-serve/air-national-guard"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="company-link"
+          >
+            <img
+              src="./assets/Seperated-Symbol.jpg"
+              alt="Air Force National Guard"
+              class="experience-icon"
+              loading="lazy"
+            />
+          </a>
+          <h3>Financial Management &amp; Comptroller</h3>
+          <span>Air Force National Guard &bull; Jun 2021 – Present</span>
           <ul>
             <li>
-              Managed accounting records and systems, ensuring responsible
-              utilization of over $2 million in funds.
+              Managed accounting records ensuring responsible utilization of
+              over $2 million in funds.
             </li>
             <li>
               Processed and certified 500+ transactions with 98% accuracy.
@@ -1171,14 +1512,21 @@
 
         <!-- 555 International Internship -->
         <div class="experience-card">
-          <img
-            src="./assets/download.png"
-            alt="IT icon"
-            class="experience-icon"
-            onclick="window.open('https://555.com/', '_blank')"
-          />
+          <a
+            href="https://555.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="company-link"
+          >
+            <img
+              src="./assets/download.png"
+              alt="555 International"
+              class="experience-icon"
+              loading="lazy"
+            />
+          </a>
           <h3>IT Specialist (Internship)</h3>
-          <span>555 International | May 2023 – Aug 2023</span>
+          <span>555 International &bull; May 2023 – Aug 2023</span>
           <ul>
             <li>
               Imaged, deployed, and reinstalled OS on 200+ devices, ensuring
@@ -1193,14 +1541,21 @@
 
         <!-- Volunteer Experience -->
         <div class="experience-card volunteer">
-          <img
-            src="./assets/volunteer.png"
-            alt="Volunteer icon"
-            class="experience-icon"
-            onclick="window.open('https://www.hospicebr.org/', '_blank')"
-          />
+          <a
+            href="https://www.hospicebr.org/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="company-link"
+          >
+            <img
+              src="./assets/volunteer.png"
+              alt="Hospice of Baton Rouge"
+              class="experience-icon"
+              loading="lazy"
+            />
+          </a>
           <h3>Volunteer</h3>
-          <span>The Hospice of Baton Rouge | Aug 2024 – Present</span>
+          <span>The Hospice of Baton Rouge &bull; Aug 2024 – Present</span>
           <ul>
             <li>Provided emotional support to patients and families.</li>
             <li>Assisted staff with administrative operations.</li>
@@ -1208,12 +1563,9 @@
         </div>
       </div>
 
-      <img
-        src="./assets/arrow.png"
-        alt="Arrow"
-        class="icon arrow"
-        onclick="location.href = '#skills'"
-      />
+      <a href="#skills" class="arrow" aria-label="Scroll to Skills section">
+        <img src="./assets/arrow.png" alt="" loading="lazy" />
+      </a>
     </section>
 
     <!-- Skills Section -->
@@ -1224,14 +1576,14 @@
       <div class="skills-grid">
         <!-- Programming Languages -->
         <div class="skill-category">
-          <h3>Programming Languages</h3>
+          <h3><span class="cat-icon">💻</span> Programming Languages</h3>
           <div class="badges">
             <span class="badge">Java</span>
             <span class="badge">JavaScript</span>
-            <span class="badge">C</span>
-            <span class="badge">Dart</span>
             <span class="badge">TypeScript</span>
             <span class="badge">Python</span>
+            <span class="badge">C</span>
+            <span class="badge">Dart</span>
             <span class="badge">HTML</span>
             <span class="badge">CSS</span>
           </div>
@@ -1239,156 +1591,142 @@
 
         <!-- Tools & Technologies -->
         <div class="skill-category">
-          <h3>Tools & Technologies</h3>
+          <h3><span class="cat-icon">🛠️</span> Tools &amp; Technologies</h3>
           <div class="badges">
-            <span class="badge">Firebase</span>
-            <span class="badge">Next.js</span>
             <span class="badge">React</span>
+            <span class="badge">Next.js</span>
+            <span class="badge">Flutter</span>
+            <span class="badge">Firebase</span>
             <span class="badge">TailwindCSS</span>
-            <span class="badge">Microsoft Excel</span>
-            <span class="badge">Power BI</span>
             <span class="badge">Git</span>
             <span class="badge">Linux</span>
+            <span class="badge">Power BI</span>
+            <span class="badge">Microsoft Excel</span>
           </div>
         </div>
 
         <!-- Certifications -->
         <div class="skill-category">
-          <h3>Certifications</h3>
+          <h3><span class="cat-icon">🏅</span> Certifications</h3>
           <div class="badges">
-            <span class="badge">Secret Security Clearance</span>
+            <span class="badge highlight">Secret Security Clearance</span>
           </div>
         </div>
       </div>
 
-      <img
-        src="./assets/arrow.png"
-        alt="Arrow"
-        class="icon arrow fade-in"
-        onclick="location.href = '#projects'"
-      />
+      <a href="#projects" class="arrow" aria-label="Scroll to Projects section">
+        <img src="./assets/arrow.png" alt="" loading="lazy" />
+      </a>
     </section>
 
     <!-- Projects Section -->
     <section id="projects">
       <p class="section__text__p1">Browse My Recent</p>
       <h1 class="title">Projects</h1>
-      <div class="experience-details-container">
-        <div class="projects-container">
-          <!-- Project 1 -->
-          <div class="details-container color-container">
-            <div class="article-container">
-              <img
-                src="./assets/quick-share.jpg"
-                alt="Project 1"
-                class="project-img"
-              />
-            </div>
-            <h2 class="experience-sub-title project-title">
-              Drop & Go File Sharing
-            </h2>
-            <p>
-              A secure file-sharing site with Firebase Storage and Firestore.
-              Implemented authentication, upload validation, and timed link
-              expiration.
-            </p>
-            <div class="btn-container">
-              <button
-                class="btn btn-color-2 project-btn"
-                onclick="
-                  location.href =
-                    'https://github.com/keezyttg/File-sharing-Website'
-                "
-              >
-                Github
-              </button>
-              <button
-                class="btn btn-color-2 project-btn"
-                onclick="
-                  location.href =
-                    'https://vimeo.com/1071940493/26d9474f57?share=copy'
-                "
-              >
-                Live Demo
-              </button>
-            </div>
+      <div class="projects-container">
+        <!-- Project 1 -->
+        <div class="color-container">
+          <div class="article-container">
+            <img
+              src="./assets/quick-share.jpg"
+              alt="Drop & Go File Sharing app screenshot"
+              class="project-img"
+              loading="lazy"
+            />
           </div>
-
-          <!-- Project 2 -->
-          <div class="details-container color-container">
-            <div class="article-container">
-              <img
-                src="./assets/Figma_yWRKMGUKX1.png"
-                alt="Project 2"
-                class="project-img"
-              />
-            </div>
-            <h2 class="experience-sub-title project-title">
-              Fortis - Wellness App
-            </h2>
-            <p>
-              A Flutter wellness app with journaling, meditation, and grounding
-              tools. Led UI/UX design in Figma and integrated Firebase Auth and
-              Firestore.
-            </p>
-            <div class="btn-container">
-              <button
-                class="btn btn-color-2 project-btn"
-                onclick="
-                  location.href =
-                    'https://github.com/CSC-3380-Spring-2025/Team-15'
-                "
-              >
-                Github
-              </button>
-            </div>
+          <h2 class="project-title">Drop &amp; Go File Sharing</h2>
+          <p>
+            A secure file-sharing site with Firebase Storage and Firestore.
+            Implemented authentication, upload validation, and timed link
+            expiration.
+          </p>
+          <div class="btn-container">
+            <a
+              href="https://github.com/keezyttg/File-sharing-Website"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn btn-color-2 project-btn"
+            >
+              GitHub
+            </a>
+            <a
+              href="https://vimeo.com/1071940493/26d9474f57?share=copy"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn btn-color-2 project-btn"
+            >
+              Live Demo
+            </a>
           </div>
+        </div>
 
-          <!-- Project 3 -->
-          <div class="details-container color-container">
-            <div class="article-container">
-              <img
-                src="./assets/carofferanalyzer.jpg"
-                alt="Project 3"
-                class="project-img"
-              />
-            </div>
-            <h2 class="experience-sub-title project-title">
-              Car Offer Analyzer
-            </h2>
-            <p>
-              A PWA that evaluates car offers using market data and AI
-              negotiation logic. Built with Next.js, React, TailwindCSS, and
-              OpenAI API for fairness scoring.
-            </p>
-            <div class="btn-container">
-              <button
-                class="btn btn-color-2 project-btn"
-                onclick="
-                  location.href =
-                    'https://github.com/keezyttg/Car-Offer-Analyzer'
-                "
-              >
-                Github
-              </button>
-              <button
-                class="btn btn-color-2 project-btn"
-                onclick="
-                  location.href = 'https://car-offer-analyzer.vercel.app/'
-                "
-              >
-                Link
-              </button>
-            </div>
+        <!-- Project 2 -->
+        <div class="color-container">
+          <div class="article-container">
+            <img
+              src="./assets/Figma_yWRKMGUKX1.png"
+              alt="Fortis Wellness App screenshot"
+              class="project-img"
+              loading="lazy"
+            />
+          </div>
+          <h2 class="project-title">Fortis — Wellness App</h2>
+          <p>
+            A Flutter wellness app with journaling, meditation, and grounding
+            tools. Led UI/UX design in Figma and integrated Firebase Auth and
+            Firestore.
+          </p>
+          <div class="btn-container">
+            <a
+              href="https://github.com/CSC-3380-Spring-2025/Team-15"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn btn-color-2 project-btn"
+            >
+              GitHub
+            </a>
+          </div>
+        </div>
+
+        <!-- Project 3 -->
+        <div class="color-container">
+          <div class="article-container">
+            <img
+              src="./assets/carofferanalyzer.jpg"
+              alt="Car Offer Analyzer app screenshot"
+              class="project-img"
+              loading="lazy"
+            />
+          </div>
+          <h2 class="project-title">Car Offer Analyzer</h2>
+          <p>
+            A PWA that evaluates car offers using market data and AI negotiation
+            logic. Built with Next.js, React, TailwindCSS, and OpenAI API for
+            fairness scoring.
+          </p>
+          <div class="btn-container">
+            <a
+              href="https://github.com/keezyttg/Car-Offer-Analyzer"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn btn-color-2 project-btn"
+            >
+              GitHub
+            </a>
+            <a
+              href="https://car-offer-analyzer.vercel.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn btn-color-1 project-btn"
+            >
+              Live Demo
+            </a>
           </div>
         </div>
       </div>
-      <img
-        src="./assets/arrow.png"
-        alt="Arrow"
-        class="icon arrow"
-        onclick="location.href = '#contact'"
-      />
+      <a href="#contact" class="arrow" aria-label="Scroll to Contact section">
+        <img src="./assets/arrow.png" alt="" loading="lazy" />
+      </a>
     </section>
 
     <!-- Contact Section -->
@@ -1399,27 +1737,31 @@
         <div class="contact-info-container">
           <img
             src="./assets/email.png"
-            alt="Email icon"
-            class="icon contact-icon email-icon"
+            alt=""
+            class="icon contact-icon"
+            loading="lazy"
           />
           <p>
-            <a href="mailto:lorenzojackson478@yahoo.com"
-              >lorenzojackson478@yahoo.com</a
-            >
+            <a href="mailto:lorenzojackson478@yahoo.com">
+              lorenzojackson478@yahoo.com
+            </a>
           </p>
         </div>
         <div class="contact-info-container">
           <img
             src="./assets/linkedin.png"
-            alt="LinkedIn icon"
+            alt=""
             class="icon contact-icon"
+            loading="lazy"
           />
           <p>
             <a
               href="https://www.linkedin.com/in/lorenzo-jackson-b1439524a/"
               target="_blank"
-              >LinkedIn</a
+              rel="noopener noreferrer"
             >
+              LinkedIn
+            </a>
           </p>
         </div>
       </div>
@@ -1438,16 +1780,24 @@
           </ul>
         </div>
       </nav>
-      <p>Copyright © 2026 Lorenzo Jackson. All Rights Reserved.</p>
+      <p>Copyright &copy; 2026 Lorenzo Jackson. All Rights Reserved.</p>
     </footer>
+
+    <!-- Back to Top -->
+    <button id="back-to-top" type="button" aria-label="Back to top">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 4l-8 8h6v8h4v-8h6z" />
+      </svg>
+    </button>
 
     <script>
       // Toggle mobile menu
       function toggleMenu() {
         const menu = document.querySelector(".menu-links");
         const icon = document.querySelector(".hamburger-icon");
-        menu.classList.toggle("open");
+        const isOpen = menu.classList.toggle("open");
         icon.classList.toggle("open");
+        icon.setAttribute("aria-expanded", isOpen);
       }
 
       // Smooth scrolling for anchor links
@@ -1461,9 +1811,11 @@
         });
       });
 
-      // Active nav on scroll
+      // Combined scroll handler using rAF
       const sections = document.querySelectorAll("section");
       const navLinks = document.querySelectorAll(".nav-links a");
+      const progressBar = document.getElementById("scroll-progress");
+      const backToTopBtn = document.getElementById("back-to-top");
 
       let ticking = false;
       window.addEventListener("scroll", () => {
@@ -1471,6 +1823,8 @@
           window.requestAnimationFrame(() => {
             updateActiveNav();
             updateNavOnScroll();
+            updateScrollProgress();
+            updateBackToTop();
             ticking = false;
           });
           ticking = true;
@@ -1504,67 +1858,182 @@
         });
       }
 
-      // Fade-in animation
-      const faders = document.querySelectorAll(".fade-in");
+      function updateScrollProgress() {
+        const scrollTop = document.documentElement.scrollTop;
+        const scrollHeight =
+          document.documentElement.scrollHeight -
+          document.documentElement.clientHeight;
+        if (progressBar && scrollHeight > 0) {
+          progressBar.style.width = (scrollTop / scrollHeight) * 100 + "%";
+        }
+      }
+
+      function updateBackToTop() {
+        if (window.scrollY > 400) {
+          backToTopBtn.classList.add("visible");
+        } else {
+          backToTopBtn.classList.remove("visible");
+        }
+      }
+
+      backToTopBtn.addEventListener("click", () => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+
+      // Fade-in animation observer
       const appearOptions = {
-        threshold: 0.2,
-        rootMargin: "0px 0px -100px 0px",
+        threshold: 0.15,
+        rootMargin: "0px 0px -80px 0px",
       };
 
       const appearOnScroll = new IntersectionObserver(function (
         entries,
-        appearOnScroll,
+        observer,
       ) {
         entries.forEach((entry) => {
-          if (!entry.isIntersecting) {
-            return;
-          } else {
+          if (entry.isIntersecting) {
             entry.target.classList.add("show");
-            appearOnScroll.unobserve(entry.target);
+            observer.unobserve(entry.target);
           }
         });
       }, appearOptions);
 
-      faders.forEach((fader) => {
-        appearOnScroll.observe(fader);
+      // Staggered fade-in on card groups
+      document.addEventListener("DOMContentLoaded", function () {
+        document.querySelectorAll(".experience-card").forEach((el, i) => {
+          el.classList.add("fade-in");
+          el.style.transitionDelay = i * 0.08 + "s";
+          appearOnScroll.observe(el);
+        });
+
+        document.querySelectorAll(".skill-category").forEach((el, i) => {
+          el.classList.add("fade-in");
+          el.style.transitionDelay = i * 0.12 + "s";
+          appearOnScroll.observe(el);
+        });
+
+        document.querySelectorAll(".color-container").forEach((el, i) => {
+          el.classList.add("fade-in");
+          el.style.transitionDelay = i * 0.12 + "s";
+          appearOnScroll.observe(el);
+        });
+
+        document.querySelectorAll("#about .details-container").forEach((el, i) => {
+          el.classList.add("fade-in");
+          el.style.transitionDelay = i * 0.1 + "s";
+          appearOnScroll.observe(el);
+        });
+
+        document.querySelectorAll(".text-container").forEach((el) => {
+          el.classList.add("fade-in");
+          appearOnScroll.observe(el);
+        });
       });
 
-      // Typing effect
+      // Typing effect with blinking cursor
       const text = "Computer Science Student & Developer";
-      let i = 0;
       const typeWriter = () => {
         const element = document.querySelector(".section__text__p2");
         if (!element) return;
-
-        // Clear any existing text before starting
-        element.textContent = "";
-        i = 0;
+        let i = 0;
+        let typed = "";
+        element.innerHTML = '<span class="cursor"></span>';
 
         const type = () => {
           if (i < text.length) {
-            element.textContent += text.charAt(i);
+            typed += text.charAt(i);
+            element.innerHTML = typed + '<span class="cursor"></span>';
             i++;
-            setTimeout(type, 100);
+            setTimeout(type, 65);
           }
         };
         type();
       };
 
-      // Start typing after page loads
       window.addEventListener("load", () => {
-        setTimeout(typeWriter, 500);
+        setTimeout(typeWriter, 600);
       });
 
-      // Add fade-in class to elements
-      document.addEventListener("DOMContentLoaded", function () {
-        const observerElements = document.querySelectorAll(
-          ".experience-card, .skill-category, .color-container, .details-container",
-        );
-        observerElements.forEach((el) => {
-          el.classList.add("fade-in");
-          appearOnScroll.observe(el);
+      // Particle canvas
+      (function () {
+        const canvas = document.getElementById("particle-canvas");
+        if (!canvas) return;
+        const ctx = canvas.getContext("2d");
+        const particles = [];
+
+        function resizeCanvas() {
+          canvas.width = window.innerWidth;
+          canvas.height = window.innerHeight;
+        }
+        window.addEventListener("resize", resizeCanvas);
+
+        function Particle() {
+          this.reset = function () {
+            this.x = Math.random() * canvas.width;
+            this.y = Math.random() * canvas.height;
+            this.size = Math.random() * 1.5 + 0.5;
+            this.vx = (Math.random() - 0.5) * 0.35;
+            this.vy = (Math.random() - 0.5) * 0.35;
+            this.alpha = Math.random() * 0.35 + 0.08;
+          };
+          this.reset();
+          this.update = function () {
+            this.x += this.vx;
+            this.y += this.vy;
+            if (
+              this.x < 0 ||
+              this.x > canvas.width ||
+              this.y < 0 ||
+              this.y > canvas.height
+            ) {
+              this.reset();
+            }
+          };
+          this.draw = function () {
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctx.fillStyle = "rgba(99, 102, 241, " + this.alpha + ")";
+            ctx.fill();
+          };
+        }
+
+        function drawLines() {
+          for (var a = 0; a < particles.length; a++) {
+            for (var b = a + 1; b < particles.length; b++) {
+              var dx = particles[a].x - particles[b].x;
+              var dy = particles[a].y - particles[b].y;
+              var dist = Math.sqrt(dx * dx + dy * dy);
+              if (dist < 110) {
+                ctx.beginPath();
+                ctx.moveTo(particles[a].x, particles[a].y);
+                ctx.lineTo(particles[b].x, particles[b].y);
+                ctx.strokeStyle =
+                  "rgba(99, 102, 241, " +
+                  0.07 * (1 - dist / 110) +
+                  ")";
+                ctx.lineWidth = 0.5;
+                ctx.stroke();
+              }
+            }
+          }
+        }
+
+        function animate() {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          particles.forEach(function (p) {
+            p.update();
+            p.draw();
+          });
+          drawLines();
+          requestAnimationFrame(animate);
+        }
+
+        window.addEventListener("load", function () {
+          resizeCanvas();
+          for (var i = 0; i < 120; i++) particles.push(new Particle());
+          animate();
         });
-      });
+      })();
     </script>
   </body>
 </html>
